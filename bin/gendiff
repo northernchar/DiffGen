@@ -1,0 +1,43 @@
+#!/usr/bin/env php
+
+<?php
+
+require_once __DIR__ . '/../vendor/autoload.php';
+use function Gendiff\genDiff;
+
+$doc = <<<DOC
+Generate diff
+
+Usage:
+  gendiff (-h|--help)
+  gendiff (-v|--version)
+  gendiff [--format <fmt>] <firstFile> <secondFile>
+
+Options:
+  -h --help                     Show this screen
+  -v --version                  Show version
+  --format <fmt>                Report format [default: stylish]
+  
+
+DOC;
+
+$params = array(
+    'help'=>true,
+    'version'=> '1.0.0',
+);
+
+$args = Docopt::handle($doc, $params);
+
+// foreach ($args as $k=>$v)
+//     print_r($k.': '.json_encode($v).PHP_EOL);
+
+
+$result = Gendiff($args['<firstFile>'], $args['<secondFile>']);
+
+echo "{$result}\n";
+
+// $re = getcwd();
+// print_r("\n$re\n");
+
+
+

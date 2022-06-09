@@ -1,0 +1,29 @@
+{
+    "license": "MIT",
+    "name": "hexlet/code",
+    "description": "edu",
+    "autoload": {
+        "psr-4": {
+            "Hexlet\\Code\\": "src/"
+        },
+        "files": [
+            "src/Gendiff-mod.php"
+        ]
+    },
+    "bin": [
+        "bin/gendiff"
+      ],
+    "authors": [
+        {
+            "name": "Vladislav",
+            "email": "55162837+northernchar@users.noreply.github.com"
+        }
+    ],
+    "require": {
+        "docopt/docopt": "^1.0",
+        "lstrojny/functional-php": "^1.17"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "9.5"
+    }
+}
