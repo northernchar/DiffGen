@@ -22,8 +22,8 @@ class GendiffTest extends TestCase
         }
         END;
 
-        $path1 = "./src/file1.json";
-        $path2 = "./src/file2.json";
+        $path1 = "./tests/file1.json";
+        $path2 = "./tests/file2.json";
 
         //Act
         $actual = genDiff($path1, $path2);

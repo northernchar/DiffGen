@@ -36,8 +36,5 @@ $result = Gendiff($args['<firstFile>'], $args['<secondFile>']);
 
 echo "{$result}\n";
 
-// $re = getcwd();
-// print_r("\n$re\n");
-
 
 

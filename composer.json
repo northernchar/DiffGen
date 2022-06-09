@@ -2,6 +2,7 @@
     "license": "MIT",
     "name": "hexlet/code",
     "description": "edu",
+    "type": "library",
     "autoload": {
         "psr-4": {
             "Hexlet\\Code\\": "src/"
