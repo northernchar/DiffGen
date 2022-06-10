@@ -1,3 +1,6 @@
 /vendor/
 /.vscode/
 /.idea/
+/.phpunit.cache/
+/tools/
+/.php-cs-fixer.cache/

@@ -8,6 +8,11 @@ use function Gendiff\genDiff;
 
 class GendiffTest extends TestCase
 {
+    /**
+     * Test Gendiff
+     * 
+     * @return void
+     */
     public function testGendiff()
     {
         //Arrange
@@ -22,12 +27,12 @@ class GendiffTest extends TestCase
         }
         END;
 
-        $path1 = "./tests/file1.json";
-        $path2 = "./tests/file2.json";
+        $path1 = "./tests/fixtures/file1.json";
+        $path2 = "./tests/fixtures/file2.json";
 
         //Act
         $actual = genDiff($path1, $path2);
-        //
+        //Assert
         $this->assertEquals($expected, $actual);
     }
 }

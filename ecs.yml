@@ -1,0 +1,2 @@
+imports:
+  - { resource: vendor/umbrellio/code-style-php/umbrellio-cs.yml
