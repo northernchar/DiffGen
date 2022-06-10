@@ -32,6 +32,8 @@ jobs:
     steps:
       - name: 'Checkout'
         uses: actions/checkout@v2
+        with:
+          fetch-depth: 0 # important!
       - name: 'Setup PHP'
         uses: shivammathur/setup-php@v2
         with:	
@@ -43,6 +45,8 @@ jobs:
       - name: 'Install PHP dependencies with Composer'
         run: composer install --prefer-dist --no-progress --no-suggest --optimize-autoloader
         working-directory: './'
+      - name: Install PHP_CodeSniffer
+        run: composer global require "squizlabs/php_codesniffer=*" --prefer-dist --no-progress --no-suggest --optimize-autoloader
       - name: 'Linting PHP source files'
         run: 'composer exec --verbose phpcs -- --standard=PSR12 src bin'
   
