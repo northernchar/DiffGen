@@ -51,32 +51,9 @@ jobs:
         run: 'composer exec --verbose phpcs -- --standard=PSR12 src bin'
 
   test:
-    runs-on: ubuntu-latest
-    strategy:	
-      matrix:
-        operating_system: ['ubuntu-latest']
-        php_versions: ['8.1.6']
-    env:
-      PHP_CS_FIXER_FUTURE_MODE: '0'
-    name: 'PHPUnit'
-    steps:
-      - name: 'Checkout'
-        uses: actions/checkout@v2
-        with:
-          fetch-depth: 0 # important!
-      - name: 'Setup PHP'
-        uses: shivammathur/setup-php@v2
-        with:	
-          php-version: ${{ matrix.php_versions }}
-          extensions: '${{ env.php_extensions }}'
-          ini-values: memory_limit=-1	
-          tools: composer
-          coverage: none
-      - name: 'Install PHP dependencies with Composer'
-        run: composer install --prefer-dist --no-progress --no-suggest --optimize-autoloader
-        working-directory: './'
-      - name: 'Install PHPUnit'
-        uses: php-actions/phpunit@v9
+    - uses: actions/checkout@v2
+    - uses: php-actions/composer@v5 # or alternative dependency management
+    - uses: php-actions/phpunit@v3
         with:
           configuration: phpunit.xml
           memory_limit: 256M
