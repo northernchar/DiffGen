@@ -90,8 +90,5 @@ jobs:
           ./cc-test-reporter before-build
       - name: Run Tests
         run: |
-          php vendor/bin/phpunit --coverage-clover clover.xml --configuration phpunit.xml
+          php vendor/bin/phpunit --coverage-clover clover.xml --configuration phpunit.xml tests
           ./cc-test-reporter after-build -t clover --exit-code $?
-
-      - name: 'Install phpunit'
-        run: composer require phpunit/phpunit ^9.5
