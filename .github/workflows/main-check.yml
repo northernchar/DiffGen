@@ -70,7 +70,6 @@ jobs:
     strategy:	
       matrix:
         operating_system: ['ubuntu-latest']
-        php_versions: ['8.1.6']
     env:
       PHP_CS_FIXER_FUTURE_MODE: '0'
     name: "Code coverage"
@@ -79,13 +78,9 @@ jobs:
       - name: 'Setup PHP'
         uses: shivammathur/setup-php@v2
         with:	
-          php-version: ${{ matrix.php_versions }}
-          extensions: '${{ env.php_extensions }}'
-          ini-values: memory_limit=-1	
-          tools: composer
-          coverage: none
-      - name: 'Install phpunit'
-        run: composer require phpunit/phpunit ^9.5
+          php-version: '8.1.6'
+          tools: composer, phpunit:9.5
+          coverage: xdebug
       - name: 'Install PHP dependencies with Composer'
         run: composer install --prefer-dist --no-progress --no-suggest --optimize-autoloader
         working-directory: './'
@@ -96,3 +91,6 @@ jobs:
         with:
           coverageCommand: ./vendor/bin/phpunit --coverage-clover build/logs/clover.xml
           debug: true
+
+      # - name: 'Install phpunit'
+      #   run: composer require phpunit/phpunit ^9.5
