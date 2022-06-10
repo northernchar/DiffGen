@@ -17,7 +17,7 @@ on:
 
 env:
   COVERAGE: '1'
-    php_extensions: 'pcntl, pcov, ...'
+  php_extensions: 'pcntl, pcov, ...'
   
 jobs:
   lint:
