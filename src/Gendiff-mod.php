@@ -2,9 +2,6 @@
 
 namespace Gendiff;
 
-use function Functional\if_else;
-
-
 function format($gitted)
 {
     $mapped = array_map(fn ($item) => "  {$item['status']} {$item['key']}: {$item['value']}", $gitted);
