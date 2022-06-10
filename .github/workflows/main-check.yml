@@ -51,9 +51,18 @@ jobs:
         run: 'composer exec --verbose phpcs -- --standard=PSR12 src bin'
 
   test:
-    - uses: actions/checkout@v2
-    - uses: php-actions/composer@v5 # or alternative dependency management
-    - uses: php-actions/phpunit@v3
-      with:
-        configuration: phpunit.xml
-        memory_limit: 256M
+    runs-on: ubuntu-latest
+    strategy:	
+      matrix:
+        operating_system: ['ubuntu-latest']
+        php_versions: ['8.1.6']
+    env:
+      PHP_CS_FIXER_FUTURE_MODE: '0'
+    name: 'PHPUnit'
+    steps:
+      - uses: actions/checkout@v2
+      - uses: php-actions/composer@v5 # or alternative dependency management
+      - uses: php-actions/phpunit@v9
+        with:
+          configuration: phpunit.xml
+          memory_limit: 256M
