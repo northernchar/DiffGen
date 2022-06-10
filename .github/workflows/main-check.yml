@@ -49,7 +49,6 @@ jobs:
         run: composer global require "squizlabs/php_codesniffer=*" --prefer-dist --no-progress --no-suggest --optimize-autoloader
       - name: 'Linting PHP source files'
         run: 'composer exec --verbose phpcs -- --standard=PSR12 src bin'
-
   test:
     runs-on: ubuntu-latest
     strategy:	
@@ -68,3 +67,29 @@ jobs:
         with:
           configuration: phpunit.xml
           memory_limit: 256M
+  coverage:
+    needs: test
+    runs-on: ubuntu-latest
+    name: "Code coverage"
+    steps:
+      - uses: actions/checkout@v2
+      - name: 'Setup PHP'
+        uses: shivammathur/setup-php@v2
+        with:	
+          php-version: ${{ matrix.php_versions }}
+          extensions: '${{ env.php_extensions }}'
+          ini-values: memory_limit=-1	
+          tools: composer
+          coverage: none
+      - name: 'Install phpunit'
+        run: composer require phpunit/phpunit ^9.5
+      - name: 'Install PHP dependencies with Composer'
+        run: composer install --prefer-dist --no-progress --no-suggest --optimize-autoloader
+        working-directory: './'
+      - name: Test & publish code coverage
+      uses: paambaati/codeclimate-action@v3.0.0
+      env:
+        CC_TEST_REPORTER_ID: <code_climate_reporter_id>
+      with:
+        coverageCommand: phpunit --coverage-clover build/logs/clover.xml
+        debug: true
