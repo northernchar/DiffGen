@@ -29,20 +29,20 @@ jobs:
       env:	
         PHP_CS_FIXER_FUTURE_MODE: '0'
       name: 'Lint'
-      steps:
-        - name: 'Checkout'
-          uses: actions/checkout@v2
-        - name: 'Setup PHP'
-          uses: shivammathur/setup-php@v2
-          with:	
-            php-version: ${{ matrix.php_versions }}
-            extensions: '${{ env.php_extensions }}'
-            ini-values: memory_limit=-1	
-            tools: composer
-            coverage: none
-        - name: 'Install PHP dependencies with Composer'
-          run: composer install --prefer-dist --no-progress --no-suggest --optimize-autoloader
-          working-directory: './'
-        - name: 'Linting PHP source files'
-          run: 'composer lint'
+    steps:
+      - name: 'Checkout'
+        uses: actions/checkout@v2
+      - name: 'Setup PHP'
+        uses: shivammathur/setup-php@v2
+        with:	
+          php-version: ${{ matrix.php_versions }}
+          extensions: '${{ env.php_extensions }}'
+          ini-values: memory_limit=-1	
+          tools: composer
+          coverage: none
+      - name: 'Install PHP dependencies with Composer'
+        run: composer install --prefer-dist --no-progress --no-suggest --optimize-autoloader
+        working-directory: './'
+      - name: 'Linting PHP source files'
+        run: 'composer lint'
   
