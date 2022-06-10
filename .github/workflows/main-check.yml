@@ -27,7 +27,7 @@ jobs:
         operating_system: ['ubuntu-latest']
     env:
       PHP_CS_FIXER_FUTURE_MODE: '0'
-      CC_TEST_REPORTER_ID: 59a1e45fdcb7f3eda502a655ccd50d73af3e1bbd3d3c694433b79947b089f640
+      CC_TEST_REPORTER_ID: ${{ CC_TEST_REPORTER_ID }}
     name: "Code coverage"
     steps:
       - uses: actions/checkout@v2
