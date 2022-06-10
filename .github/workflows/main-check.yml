@@ -80,5 +80,3 @@ jobs:
         with:
           configuration: phpunit.xml
           memory_limit: 256M
-      - name: 'Run tests'
-        run: phpunit tests
