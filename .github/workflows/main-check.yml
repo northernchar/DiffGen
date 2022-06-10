@@ -58,8 +58,6 @@ jobs:
     env:
       PHP_CS_FIXER_FUTURE_MODE: '0'
     name: 'PHPUnit'
-    needs:
-      - lint
     steps:
       - uses: actions/checkout@v2
       - uses: php-actions/composer@v5 # or alternative dependency management
@@ -68,7 +66,6 @@ jobs:
           configuration: phpunit.xml
           memory_limit: 256M
   coverage:
-    needs: test
     runs-on: ubuntu-latest
     name: "Code coverage"
     steps:
@@ -87,9 +84,9 @@ jobs:
         run: composer install --prefer-dist --no-progress --no-suggest --optimize-autoloader
         working-directory: './'
       - name: Test & publish code coverage
-      uses: paambaati/codeclimate-action@v3.0.0
-      env:
-        CC_TEST_REPORTER_ID: <code_climate_reporter_id>
-      with:
-        coverageCommand: phpunit --coverage-clover build/logs/clover.xml
-        debug: true
+        uses: paambaati/codeclimate-action@v3.0.0
+        env:
+          CC_TEST_REPORTER_ID: <code_climate_reporter_id>
+        with:
+          coverageCommand: phpunit --coverage-clover build/logs/clover.xml
+          debug: true
