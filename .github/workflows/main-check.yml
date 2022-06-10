@@ -44,5 +44,5 @@ jobs:
         run: composer install --prefer-dist --no-progress --no-suggest --optimize-autoloader
         working-directory: './'
       - name: 'Linting PHP source files'
-        run: 'composer lint'
+        run: 'composer exec --verbose phpcs -- --standard=PSR12 src bin'
   
