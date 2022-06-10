@@ -4,13 +4,7 @@ namespace Gendiff;
 
 use function Functional\if_else;
 
-/**
- * Define template file.
- *
- * @param array $gitted must be a path to File1
- *
- * @return string
- */
+
 function format($gitted)
 {
     $mapped = array_map(fn ($item) => "  {$item['status']} {$item['key']}: {$item['value']}", $gitted);
@@ -19,13 +13,6 @@ function format($gitted)
     return $result;
 }
 
-/**
- * Define template file.
- *
- * @param string $pathToFile must be a path to File1
- *
- * @return array
- */
 function getJSONData($pathToFile)
 {
     $json = file_get_contents($pathToFile);
@@ -49,22 +36,10 @@ function getJSONData($pathToFile)
     return $data;
 }
 
-/**
- * Define template file.
- *
- * @param string $pathToFile1 must be a path to File1
- * @param string $pathToFile2 must be a path to File2
- * @param string $format      defines expected output format
- *
- * @return string
- */
-function genDiff($pathToFile1, $pathToFile2, $format = null)
+function getChanges(array $merged, array $original, array $committed): array
 {
-    $original = getJSONData($pathToFile1);
-    $committed = getJSONData($pathToFile2);
-    $changes = array_merge($original, $committed);
-    $gitted = array_reduce(
-        array_keys($changes),
+    $changes = array_reduce(
+        array_keys($merged),
         function ($acc, $key) use ($original, $committed) {
             $status = array_key_exists($key, $committed) <=> array_key_exists($key, $original);
             switch ($status) {
@@ -87,8 +62,17 @@ function genDiff($pathToFile1, $pathToFile2, $format = null)
         },
         []
     );
+    return $changes;
+}
 
-    usort($gitted, fn ($a, $b) => $a['key'] <=> $b['key']);
+function genDiff($pathToFile1, $pathToFile2, $format = null)
+{
+    $original = getJSONData($pathToFile1);
+    $committed = getJSONData($pathToFile2);
+    $merged = array_merge($original, $committed);
+    $changes = getChanges($merged, $original, $committed);
 
-    return format($gitted);
+    usort($changes, fn ($a, $b) => $a['key'] <=> $b['key']);
+
+    return format($changes);
 }
