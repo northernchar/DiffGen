@@ -92,7 +92,7 @@ jobs:
       - name: Test & publish code coverage
         uses: paambaati/codeclimate-action@v3.0.0
         env:
-          CC_TEST_REPORTER_ID: <code_climate_reporter_id>
+          CC_TEST_REPORTER_ID: 59a1e45fdcb7f3eda502a655ccd50d73af3e1bbd3d3c694433b79947b089f640
         with:
           coverageCommand: ./vendor/bin/phpunit --coverage-clover build/logs/clover.xml
           debug: true
