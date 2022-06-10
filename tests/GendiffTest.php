@@ -11,6 +11,8 @@ class GendiffTest extends TestCase
     /**
      * Test Gendiff
      * 
+     * @covers Gendiff\genDiff
+     * 
      * @return void
      */
     public function testGendiff()
