@@ -80,8 +80,10 @@ jobs:
         uses: shivammathur/setup-php@v2
         with:	
           php-version: '8.1.6'
-          tools: composer, phpunit:9.5
+          tools: composer
           coverage: xdebug
+      - name: 'Install phpunit'
+        run: composer require phpunit/phpunit ^9.5
       - name: Code Climate Setup
         run: |
           curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter && chmod +x ./cc-test-reporter
@@ -91,5 +93,5 @@ jobs:
           php vendor/bin/phpunit --coverage-clover clover.xml --configuration phpunit.xml tests/Unit
           ./cc-test-reporter after-build -t clover --exit-code $?
 
-      # - name: 'Install phpunit'
-      #   run: composer require phpunit/phpunit ^9.5
+      - name: 'Install phpunit'
+        run: composer require phpunit/phpunit ^9.5
