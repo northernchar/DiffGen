@@ -59,6 +59,8 @@ jobs:
     env:
       PHP_CS_FIXER_FUTURE_MODE: '0'
     name: 'PHPUnit'
+    needs:
+      - lint
     steps:
       - uses: actions/checkout@v2
       - uses: php-actions/composer@v5 # or alternative dependency management
