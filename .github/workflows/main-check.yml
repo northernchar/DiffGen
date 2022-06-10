@@ -28,7 +28,7 @@ jobs:
     env:
       PHP_CS_FIXER_FUTURE_MODE: '0'
       CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
-    name: "Code coverage"
+    name: "Lint, test and code coverage"
     steps:
       - uses: actions/checkout@v2
       - name: 'Setup PHP'
