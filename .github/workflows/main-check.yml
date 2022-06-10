@@ -76,6 +76,9 @@ jobs:
         run: composer install --prefer-dist --no-progress --no-suggest --optimize-autoloader
         working-directory: './'
       - name: 'Install PHPUnit'
-        uses: php-actions/phpunit@v9.5.0
+        uses: php-actions/phpunit@v9
+        with:
+          configuration: phpunit.xml
+          memory_limit: 256M
       - name: 'Run tests'
         run: phpunit tests
