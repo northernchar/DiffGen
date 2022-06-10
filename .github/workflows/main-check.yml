@@ -94,5 +94,5 @@ jobs:
         env:
           CC_TEST_REPORTER_ID: <code_climate_reporter_id>
         with:
-          coverageCommand: phpunit --coverage-clover build/logs/clover.xml
+          coverageCommand: ./vendor/bin/phpunit --coverage-clover build/logs/clover.xml
           debug: true
