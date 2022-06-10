@@ -62,14 +62,11 @@ function genDiff($pathToFile1, $pathToFile2, $format = null)
 {
     $original = getJSONData($pathToFile1);
     $committed = getJSONData($pathToFile2);
-
     $changes = array_merge($original, $committed);
-
     $gitted = array_reduce(
         array_keys($changes),
         function ($acc, $key) use ($original, $committed) {
             $status = array_key_exists($key, $committed) <=> array_key_exists($key, $original);
-
             switch ($status) {
                 case 0:
                     if ($original[$key] === $committed[$key]) {
