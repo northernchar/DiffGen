@@ -2,15 +2,15 @@
 
 namespace Gendiff;
 
-function format($gitted)
+function format(array $changes): string
 {
-    $mapped = array_map(fn ($item) => "  {$item['status']} {$item['key']}: {$item['value']}", $gitted);
+    $mapped = array_map(fn ($item) => "  {$item['status']} {$item['key']}: {$item['value']}", $changes);
     $formatted = implode("\n", $mapped);
     $result = "{\n{$formatted}\n}";
     return $result;
 }
 
-function getJSONData($pathToFile)
+function getJSONData(string $pathToFile): array
 {
     $json = file_get_contents($pathToFile);
     $rowData = json_decode($json, true);
@@ -62,7 +62,7 @@ function getChanges(array $merged, array $original, array $committed): array
     return $changes;
 }
 
-function genDiff($pathToFile1, $pathToFile2, $format = null)
+function genDiff(string $pathToFile1, string $pathToFile2, string $format = null): string
 {
     $original = getJSONData($pathToFile1);
     $committed = getJSONData($pathToFile2);
@@ -70,6 +70,6 @@ function genDiff($pathToFile1, $pathToFile2, $format = null)
     $changes = getChanges($merged, $original, $committed);
 
     usort($changes, fn ($a, $b) => $a['key'] <=> $b['key']);
-
-    return format($changes);
+    $result = format($changes);
+    return $result;
 }
