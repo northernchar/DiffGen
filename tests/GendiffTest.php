@@ -7,7 +7,7 @@ use PHPUnit\Framework\TestCase;
 use function Gendiff\genDiff;
 use function Gendiff\format;
 use function Gendiff\getChanges;
-use function Gendiff\getJSONData;
+use function Gendiff\Parsers\getJSONData;
 
 class GendiffTest extends TestCase
 {
@@ -50,19 +50,18 @@ class GendiffTest extends TestCase
       $path2 = "./tests/fixtures/file2.json";
       $original = getJSONData($path1);
       $committed = getJSONData($path2);
-      $merged = array_merge($original, $committed);
 
       $expected = [
+        ["key" => "follow", "value" => "false", "status" => "-"],
         ["key" => "host", "value" => "hexlet.io", "status" => " "],
+        ["key" => "proxy", "value" => "123.234.53.22", "status" => "-"],
         ["key" => "timeout", "value" => 50, "status" => "-"],
         ["key" => "timeout", "value" => 20, "status" => "+"],
-        ["key" => "proxy", "value" => "123.234.53.22", "status" => "-"],
-        ["key" => "follow", "value" => "false", "status" => "-"],
         ["key" => "verbose", "value" => "true", "status" => "+"]
       ];
 
       //Act
-      $actual = getChanges($merged, $original, $committed);
+      $actual = getChanges($original, $committed);
 
       //Assert
       $this->assertEquals($expected, $actual);
