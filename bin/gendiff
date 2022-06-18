@@ -31,10 +31,13 @@ $args = Docopt::handle($doc, $params);
 // foreach ($args as $k=>$v)
 //     print_r($k.': '.json_encode($v).PHP_EOL);
 
-
-$result = Gendiff($args['<firstFile>'], $args['<secondFile>']);
-
+$result = Gendiff($args['<firstFile>'], $args['<secondFile>'], $args['--format']);
 echo "{$result}\n";
 
 
 
+// ./bin/gendiff ./tests/fixtures/json/file3.json ./tests/fixtures/json/file4.json
+// ./bin/gendiff ./tests/fixtures/yaml/file3.yml ./tests/fixtures/yaml/file4.yml
+
+// ./bin/gendiff ./tests/fixtures/json/file3.json ./tests/fixtures/json/file4.json
+// ./bin/gendiff ./tests/fixtures/yaml/file3.yml ./tests/fixtures/json/file4.json

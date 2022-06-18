@@ -15,3 +15,4 @@ function getYamlData(string $pathToFile): array
     $content = Yaml::parseFile($pathToFile, Yaml::PARSE_OBJECT_FOR_MAP);
     return json_decode(json_encode($content), true);
 }
+

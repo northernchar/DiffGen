@@ -8,7 +8,7 @@
             "Hexlet\\Code\\": "src/"
         },
         "files": [
-            "src/Gendiff-mod.php",
+            "src/Gendiff.php",
             "src/Parsers.php",
             "src/Utils.php",
             "src/Formatters.php"
