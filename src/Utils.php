@@ -32,48 +32,6 @@ function isYaml($file)
     return $extension === "yaml" || $extension === "yml";
 }
 
-
-function getStylishStatus($status)
-{
-    $result = '';
-
-    switch ($status) {
-        case 0:
-            $result = " ";
-            break;
-        case 1:
-            $result = "+";
-            break;
-        case -1:
-            $result = "-";
-            break;
-        case 2:
-            $result = "+";
-            break;
-        case -2:
-            $result = "-";
-            break;
-    }
-    return $result;
-}
-
-function getPlainStatus($status)
-{
-    $result = '';
-    switch ($status) {
-        case 0:
-            $result = " ";
-            break;
-        case 1:
-            $result = "+";
-            break;
-        case -1:
-            $result = "-";
-            break;
-    }
-    return $result;
-}
-
 function getAst($key, $value, int $status, $type = 'assoc')
 {
     return ["data" => ["{$key}" => $value], "meta" => ["status" => $status, "type" => $type]];

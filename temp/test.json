@@ -1,0 +1,260 @@
+[
+    {
+        "data": {
+            "common": [
+                {
+                    "data": {
+                        "follow": false
+                    },
+                    "meta": {
+                        "status": 1,
+                        "type": "child"
+                    }
+                },
+                {
+                    "data": {
+                        "setting1": "Value 1"
+                    },
+                    "meta": {
+                        "status": 0,
+                        "type": "child"
+                    }
+                },
+                {
+                    "data": {
+                        "setting2": 200
+                    },
+                    "meta": {
+                        "status": -1,
+                        "type": "child"
+                    }
+                },
+                {
+                    "data": {
+                        "setting3": [
+                            {
+                                "data": {
+                                    "setting3": true
+                                },
+                                "meta": {
+                                    "status": -1,
+                                    "type": "child"
+                                }
+                            },
+                            {
+                                "data": {
+                                    "setting3": null
+                                },
+                                "meta": {
+                                    "status": 1,
+                                    "type": "child"
+                                }
+                            }
+                        ]
+                    },
+                    "meta": {
+                        "status": 2,
+                        "type": "assoc"
+                    }
+                },
+                {
+                    "data": {
+                        "setting4": "blah blah"
+                    },
+                    "meta": {
+                        "status": 1,
+                        "type": "child"
+                    }
+                },
+                {
+                    "data": {
+                        "setting5": {
+                            "key5": "value5"
+                        }
+                    },
+                    "meta": {
+                        "status": 1,
+                        "type": "assoc"
+                    }
+                },
+                {
+                    "data": {
+                        "setting6": [
+                            {
+                                "data": {
+                                    "doge": [
+                                        {
+                                            "data": {
+                                                "wow": [
+                                                    {
+                                                        "data": {
+                                                            "wow": ""
+                                                        },
+                                                        "meta": {
+                                                            "status": -1,
+                                                            "type": "child"
+                                                        }
+                                                    },
+                                                    {
+                                                        "data": {
+                                                            "wow": "so much"
+                                                        },
+                                                        "meta": {
+                                                            "status": 1,
+                                                            "type": "child"
+                                                        }
+                                                    }
+                                                ]
+                                            },
+                                            "meta": {
+                                                "status": 2,
+                                                "type": "assoc"
+                                            }
+                                        }
+                                    ]
+                                },
+                                "meta": {
+                                    "status": 0,
+                                    "type": "assoc"
+                                }
+                            },
+                            {
+                                "data": {
+                                    "key": "value"
+                                },
+                                "meta": {
+                                    "status": 0,
+                                    "type": "child"
+                                }
+                            },
+                            {
+                                "data": {
+                                    "ops": "vops"
+                                },
+                                "meta": {
+                                    "status": 1,
+                                    "type": "child"
+                                }
+                            }
+                        ]
+                    },
+                    "meta": {
+                        "status": 0,
+                        "type": "assoc"
+                    }
+                }
+            ]
+        },
+        "meta": {
+            "status": 0,
+            "type": "assoc"
+        }
+    },
+    {
+        "data": {
+            "group1": [
+                {
+                    "data": {
+                        "baz": [
+                            {
+                                "data": {
+                                    "baz": "bas"
+                                },
+                                "meta": {
+                                    "status": -1,
+                                    "type": "child"
+                                }
+                            },
+                            {
+                                "data": {
+                                    "baz": "bars"
+                                },
+                                "meta": {
+                                    "status": 1,
+                                    "type": "child"
+                                }
+                            }
+                        ]
+                    },
+                    "meta": {
+                        "status": 2,
+                        "type": "assoc"
+                    }
+                },
+                {
+                    "data": {
+                        "foo": "bar"
+                    },
+                    "meta": {
+                        "status": 0,
+                        "type": "child"
+                    }
+                },
+                {
+                    "data": {
+                        "nest": [
+                            {
+                                "data": {
+                                    "nest": {
+                                        "key": "value"
+                                    }
+                                },
+                                "meta": {
+                                    "status": -1,
+                                    "type": "assoc"
+                                }
+                            },
+                            {
+                                "data": {
+                                    "nest": "str"
+                                },
+                                "meta": {
+                                    "status": 1,
+                                    "type": "child"
+                                }
+                            }
+                        ]
+                    },
+                    "meta": {
+                        "status": 2,
+                        "type": "assoc"
+                    }
+                }
+            ]
+        },
+        "meta": {
+            "status": 0,
+            "type": "assoc"
+        }
+    },
+    {
+        "data": {
+            "group2": {
+                "abc": 12345,
+                "deep": {
+                    "id": 45
+                }
+            }
+        },
+        "meta": {
+            "status": -1,
+            "type": "assoc"
+        }
+    },
+    {
+        "data": {
+            "group3": {
+                "deep": {
+                    "id": {
+                        "number": 45
+                    }
+                },
+                "fee": 100500
+            }
+        },
+        "meta": {
+            "status": 1,
+            "type": "assoc"
+        }
+    }
+]

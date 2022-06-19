@@ -9,9 +9,7 @@ use function Gendiff\Utils\isYaml;
 use function Gendiff\Utils\isAssoc;
 use function Gendiff\Utils\getAst;
 use function Gendiff\Utils\getValueType;
-use function Gendiff\Formatters\stylish;
-use function Gendiff\Formatters\plain;
-use function Gendiff\Formatters\json;
+use function Gendiff\Formatters\format;
 
 function buildDiff(array $original, array $committed): array
 {
@@ -30,8 +28,8 @@ function buildDiff(array $original, array $committed): array
                     $acc[] = getAst($key, $original[$key], 0, getValueType($original[$key]));
                     return $acc;
                 } else {
-                    $acc[] = getAst($key, $original[$key], -1, getValueType($original[$key]));
-                    $acc[] = getAst($key, $committed[$key], 1, getValueType($committed[$key]));
+                    $re = [getAst($key, $original[$key], -1, getValueType($original[$key])), getAst($key, $committed[$key], 1, getValueType($committed[$key]))];
+                    $acc[] = getAst($key, $re, 2);
                     return $acc;
                 }
             }
@@ -71,31 +69,11 @@ function buildData(string $path): array
     return $data;
 }
 
-
 function genDiff(string $pathToFile1, string $pathToFile2, string $format = "stylish"): string
 {
     $original = buildData($pathToFile1);
     $committed = buildData($pathToFile2);
     $changes = buildDiff($original, $committed);
 
-    if ($format === "stylish") {
-        return stylish($changes);
-    }
-    if ($format === "plain") {
-        return plain($changes);
-    }
-    if ($format === "json") {
-        return json($changes);
-    }
-
-    return stylish($changes);
+    return format($changes, $format);
 }
-
-
-
-$original = buildData($pathToFile1);
-$committed = buildData($pathToFile2);
-$changes = buildDiff($original, $committed);
-$result = plain($changes);
-
-print_r($result);
