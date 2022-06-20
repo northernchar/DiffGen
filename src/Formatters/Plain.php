@@ -18,7 +18,7 @@ function plain($node)
             $statusCode = $item['meta']['status'];
             $key = array_key_first($data);
             $val = $data[$key];
-            $currentPath = $path === '' ? "{$key}" : "'{$path}.{$key}'";
+            $currentPath = $path === '' ? "{$key}" : "{$path}.{$key}";
 
             if ($statusCode === 0) {
                 $acc[] = $iter($val, $currentPath);
@@ -26,11 +26,11 @@ function plain($node)
             }
             if ($statusCode === 1) {
                 $val = !is_array($val) ? var_export($val, true) : "[complex value]";
-                $acc[] = "Property {$currentPath} was added with value: {$val}";
+                $acc[] = "Property '{$currentPath}' was added with value: {$val}";
                 return $acc;
             }
             if ($statusCode === -1) {
-                $acc[] = "Property {$currentPath} was removed";
+                $acc[] = "Property '{$currentPath}' was removed";
                 return $acc;
             }
             if ($statusCode === 2) {
@@ -40,7 +40,7 @@ function plain($node)
                 $addedKey = array_key_first($added);
                 $removedVal = !is_array($removed[$removedKey]) ? var_export($removed[$removedKey], true) : "[complex value]";
                 $addedVal = !is_array($added[$addedKey]) ? var_export($added[$addedKey], true) : "[complex value]";
-                $acc[] = "Property {$currentPath} was updated. From {$removedVal} to {$addedVal}";
+                $acc[] = "Property '{$currentPath}' was updated. From {$removedVal} to {$addedVal}";
                 return $acc;
             }
         }, []);

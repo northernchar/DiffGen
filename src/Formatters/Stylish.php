@@ -19,12 +19,6 @@ function getStylishStatus($status)
         case -1:
             $result = "-";
             break;
-        case 2:
-            $result = "+";
-            break;
-        case -2:
-            $result = "-";
-            break;
     }
     return $result;
 }
@@ -66,12 +60,10 @@ function stylish($node, string $replacer = " ", $spacesCount = 2): string
             if($statusCode === 2) {
                 $removed = $val[0]['data'];
                 $added = $val[1]['data'];
-                $removedKey = array_key_first($removed);
-                $addedKey = array_key_first($added);
-                $removedVal = !is_array($removed[$removedKey]) ? toString($removed[$removedKey]) : $removed[$removedKey];
-                $addedVal = !is_array($added[$addedKey]) ? toString($added[$addedKey]) : $added[$addedKey];
-                $acc[] = !is_array($removedVal) ? "{$currentIndent}- {$removedKey}: {$removedVal}" : "{$currentIndent}- {$removedKey}: {$iter($removedVal, $depth + 2)}";
-                $acc[] = !is_array($addedVal) ? "{$currentIndent}+ {$addedKey}: {$addedVal}" : "{$currentIndent}+ {$addedKey}: {$iter($addedVal, $depth + 2)}";
+                $removedVal = !is_array($removed[$key]) ? toString($removed[$key]) : $removed[$key];
+                $addedVal = !is_array($added[$key]) ? toString($added[$key]) : $added[$key];
+                $acc[] = !is_array($removedVal) ? "{$currentIndent}- {$key}: {$removedVal}" : "{$currentIndent}- {$key}: {$iter($removedVal, $depth + 2)}";
+                $acc[] = !is_array($addedVal) ? "{$currentIndent}+ {$key}: {$addedVal}" : "{$currentIndent}+ {$key}: {$iter($addedVal, $depth + 2)}";
                 return $acc;
             }
             $acc[] = "{$currentIndent}{$status} {$key}: {$iter($val, $depth + 2)}";

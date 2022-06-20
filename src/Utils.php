@@ -32,7 +32,7 @@ function isYaml($file)
     return $extension === "yaml" || $extension === "yml";
 }
 
-function getAst($key, $value, int $status, $type = 'assoc')
+function getAst($key, $value, int $status, $type = 'nested')
 {
     return ["data" => ["{$key}" => $value], "meta" => ["status" => $status, "type" => $type]];
 }
@@ -40,11 +40,10 @@ function getAst($key, $value, int $status, $type = 'assoc')
 function getValueType($value)
 {
     if (isAssoc($value)) {
-        return 'assoc';
+        return 'nested';
     }
     if (!isAssoc($value) && is_array($value)) {
         return 'array';
     }
-    return is_array($value) ? 'array' :'child';
-    
+    return "leaf";
 }
