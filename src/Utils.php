@@ -13,7 +13,7 @@ function toString(mixed $value): string
     return trim(var_export($value, true), "'");
 }
 
-function isAssoc($value)
+function isAssoc(mixed $value)
 {
     if (!is_array($value)) {
         return false;
@@ -26,24 +26,24 @@ function isAssoc($value)
     return array_keys($value) !== range(0, count($value) - 1);
 }
 
-function isJson($file)
+function isJson(string $file)
 {
     $extension = getExFromFile($file);
     return $extension === "json";
 }
 
-function isYaml($file)
+function isYaml(string $file)
 {
     $extension = getExFromFile($file);
     return $extension === "yaml" || $extension === "yml";
 }
 
-function getAst($key, $value, int $status, $type = 'nested')
+function getAst(string $key, mixed $value, int $status, string $type = 'nested')
 {
     return ["data" => ["{$key}" => $value], "meta" => ["status" => $status, "type" => $type]];
 }
 
-function getValueType($value)
+function getValueType(mixed $value)
 {
     if (isAssoc($value)) {
         return 'nested';
