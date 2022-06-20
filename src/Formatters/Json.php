@@ -36,14 +36,14 @@ function json(mixed $node)
                     'status' => "updated"
                 ]];
             }
-            $acc[] = $status !== '' ? [
+            return [...$acc, $status !== '' ? [
                 'key' => $key,
                 'value' => $iter($value),
                 'status' => $status
                 ] : [
                     'key' => $key,
                     'value' => $iter($value)
-                ];
+                ]];
             return $acc;
         }, []);
 
@@ -60,10 +60,10 @@ function getJSONStatus(int $status)
 
     switch ($status) {
         case 1:
-            $result = "added";
+            return "added";
             break;
         case -1:
-            $result = "removed";
+            return "removed";
             break;
     }
 
