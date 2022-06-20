@@ -5,7 +5,7 @@ namespace Differ\Formatters;
 use function Differ\Utils\isAssoc;
 use function Functional\flatten;
 
-function plain($node)
+function plain(mixed $node)
 {
     $iter = function ($node, $path) use (&$iter) {
         $isNode = (
@@ -26,8 +26,7 @@ function plain($node)
             $currentPath = $path === '' ? "{$key}" : "{$path}.{$key}";
 
             if ($statusCode === 0) {
-                $acc[] = $iter($val, $currentPath);
-                return $acc;
+                return [...$acc, $iter($val, $currentPath)];
             }
             if ($statusCode === 1) {
                 $val = !is_array($val) ? var_export($val, true) : "[complex value]";
@@ -35,12 +34,10 @@ function plain($node)
                     $val = 'null';
                 }
 
-                $acc[] = "Property '{$currentPath}' was added with value: {$val}";
-                return $acc;
+                return [...$acc, "Property '{$currentPath}' was added with value: {$val}"];
             }
             if ($statusCode === -1) {
-                $acc[] = "Property '{$currentPath}' was removed";
-                return $acc;
+                return [...$acc, "Property '{$currentPath}' was removed"];
             }
             if ($statusCode === 2) {
                 $removed = $val[0]['data'];
@@ -62,8 +59,7 @@ function plain($node)
                     $addedVal = 'null';
                 }
 
-                $acc[] = "Property '{$currentPath}' was updated. From {$removedVal} to {$addedVal}";
-                return $acc;
+                return [...$acc, "Property '{$currentPath}' was updated. From {$removedVal} to {$addedVal}"];
             }
         }, []);
         $flattened = flatten($changes);
