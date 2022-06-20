@@ -2,7 +2,6 @@
 
 namespace Gendiff\Formatters;
 
-use function Gendiff\genDiff;
 use function Gendiff\Utils\isAssoc;
 use function Gendiff\Utils\toString;
 
