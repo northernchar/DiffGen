@@ -5,7 +5,7 @@ namespace Differ\Formatters;
 use function Differ\Utils\toString;
 use function Differ\Utils\isAssoc;
 
-function getStylishStatus($status)
+function getStylishStatus(int $status)
 {
     $result = '';
 

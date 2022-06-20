@@ -10,6 +10,7 @@ use function Differ\Utils\isAssoc;
 use function Differ\Utils\getAst;
 use function Differ\Utils\getValueType;
 use function Differ\Formatters\format;
+use function Functional\sort;
 
 function buildDiff(array $original, array $committed): array
 {
@@ -44,19 +45,18 @@ function buildDiff(array $original, array $committed): array
                 $acc[] = getAst($key, $original[$key], -1, getValueType($original[$key]));
                 return $acc;
             }
-            return $acc;
         },
         []
     );
 
-    usort($changes, function ($a, $b) {
+    $sortedChanges = sort($changes, function ($a, $b) {
         $dataA = $a['data'];
         $dataB = $b['data'];
 
         return array_keys($dataA) <=> array_keys($dataB);
     });
 
-    return array_values([...$changes]);
+    return array_values([...$sortedChanges]);
 }
 
 function buildData(string $path): array
