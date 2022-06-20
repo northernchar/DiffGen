@@ -15,8 +15,14 @@ function toString(mixed $value): string
 
 function isAssoc($value)
 {
-    if (!is_array($value)) return false;
-    if (array() === $value) return false;
+    if (!is_array($value)) {
+        return false;
+    }
+
+    if (array() === $value) {
+        return false;
+    }
+
     return array_keys($value) !== range(0, count($value) - 1);
 }
 

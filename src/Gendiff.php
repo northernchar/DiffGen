@@ -19,7 +19,7 @@ function buildDiff(array $original, array $committed): array
         function ($acc, $key) use ($original, $committed) {
             $status = array_key_exists($key, $committed) <=> array_key_exists($key, $original);
             if ($status === 0) {
-                if(isAssoc($original[$key]) && isAssoc($committed[$key])) {
+                if (isAssoc($original[$key]) && isAssoc($committed[$key])) {
                     $val = buildDiff($original[$key], $committed[$key]);
                     $acc[] = getAst($key, $val, 0);
                     return $acc;
@@ -28,7 +28,10 @@ function buildDiff(array $original, array $committed): array
                     $acc[] = getAst($key, $original[$key], 0, getValueType($original[$key]));
                     return $acc;
                 } else {
-                    $re = [getAst($key, $original[$key], -1, getValueType($original[$key])), getAst($key, $committed[$key], 1, getValueType($committed[$key]))];
+                    $re = [
+                        getAst($key, $original[$key], -1, getValueType($original[$key])),
+                        getAst($key, $committed[$key], 1, getValueType($committed[$key]))
+                    ];
                     $acc[] = getAst($key, $re, 2);
                     return $acc;
                 }
