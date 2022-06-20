@@ -1,9 +1,9 @@
 <?php
 
-namespace Gendiff\Formatters;
+namespace Differ\Formatters;
 
-use function Gendiff\Utils\isAssoc;
-use function Gendiff\Utils\toString;
+use function Differ\Utils\isAssoc;
+use function Differ\Utils\toString;
 
 function json($node)
 {

@@ -1,15 +1,15 @@
 <?php
 
-namespace Gendiff;
+namespace Differ\Differ;
 
-use function Gendiff\Parsers\getJsonData;
-use function Gendiff\Parsers\getYamlData;
-use function Gendiff\Utils\isJson;
-use function Gendiff\Utils\isYaml;
-use function Gendiff\Utils\isAssoc;
-use function Gendiff\Utils\getAst;
-use function Gendiff\Utils\getValueType;
-use function Gendiff\Formatters\format;
+use function Differ\Parsers\getJsonData;
+use function Differ\Parsers\getYamlData;
+use function Differ\Utils\isJson;
+use function Differ\Utils\isYaml;
+use function Differ\Utils\isAssoc;
+use function Differ\Utils\getAst;
+use function Differ\Utils\getValueType;
+use function Differ\Formatters\format;
 
 function buildDiff(array $original, array $committed): array
 {

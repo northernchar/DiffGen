@@ -1,6 +1,6 @@
 <?php
 
-namespace Gendiff\Utils;
+namespace Differ\Utils;
 
 function getExFromFile(string $path): string
 {

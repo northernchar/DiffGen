@@ -1,10 +1,10 @@
 <?php
 
-namespace Gendiff\Formatters;
+namespace Differ\Formatters;
 
-use function Gendiff\Formatters\plain;
-use function Gendiff\Formatters\stylish;
-use function Gendiff\Formatters\json;
+use function Differ\Formatters\plain;
+use function Differ\Formatters\stylish;
+use function Differ\Formatters\json;
 
 function format($collection, $format)
 {

@@ -1,9 +1,9 @@
 <?php
 
-namespace Gendiff\Formatters;
+namespace Differ\Formatters;
 
-use function Gendiff\Utils\toString;
-use function Gendiff\Utils\isAssoc;
+use function Differ\Utils\toString;
+use function Differ\Utils\isAssoc;
 
 function getStylishStatus($status)
 {

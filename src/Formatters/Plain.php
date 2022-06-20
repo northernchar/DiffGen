@@ -1,8 +1,8 @@
 <?php
 
-namespace Gendiff\Formatters;
+namespace Differ\Formatters;
 
-use function Gendiff\Utils\isAssoc;
+use function Differ\Utils\isAssoc;
 use function Functional\flatten;
 
 function plain($node)
