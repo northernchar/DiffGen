@@ -12,3 +12,5 @@ push:
 	git add .
 	git commit -m "fix"
 	git push
+phpstan:
+	composer exec -v phpstan analyse /src/

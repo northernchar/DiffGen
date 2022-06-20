@@ -5,7 +5,7 @@ namespace Differ\Formatters;
 use function Differ\Utils\isAssoc;
 use function Differ\Utils\toString;
 
-function json($node)
+function json(mixed $node)
 {
     $iter = function ($node) use (&$iter) {
         $isNode = (
@@ -29,22 +29,22 @@ function json($node)
                 $added = $value[1]['data'];
                 $removedVal = !is_array($removed[$key]) ? toString($removed[$key]) : $removed[$key];
                 $addedVal = !is_array($added[$key]) ? toString($added[$key]) : $added[$key];
-                $acc[] = [
+                array_push($acc, [
                     'key' => $key,
                     'old value' => $iter($removedVal),
                     'new value' => $iter($addedVal),
                     'status' => "updated"
-                ];
+                ]);
                 return $acc;
             }
-            $acc[] = $status !== '' ? [
+            array_push($acc, $status !== '' ? [
                 'key' => $key,
                 'value' => $iter($value),
                 'status' => $status
                 ] : [
                     'key' => $key,
                     'value' => $iter($value)
-                ];
+                ]);
             return $acc;
         }, []);
 
@@ -55,7 +55,7 @@ function json($node)
     return json_encode($ast, JSON_PRETTY_PRINT);
 }
 
-function getJSONStatus($status)
+function getJSONStatus(int $status)
 {
     $result = '';
 

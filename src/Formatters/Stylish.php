@@ -23,7 +23,7 @@ function getStylishStatus($status)
     return $result;
 }
 
-function stylish($node, string $replacer = " ", $spacesCount = 2): string
+function stylish(mixed $node, string $replacer = " ", int $spacesCount = 2): string
 {
 
     $iter = function ($node, $depth) use (&$iter, $replacer, $spacesCount) {
@@ -75,15 +75,15 @@ function stylish($node, string $replacer = " ", $spacesCount = 2): string
                     $addedVal = 'null';
                 }
 
-                $acc[] = !is_array($removedVal) ?
+                array_push($acc, !is_array($removedVal) ?
                     "{$currentIndent}- {$key}: {$removedVal}" :
-                        "{$currentIndent}- {$key}: {$iter($removedVal, $depth + 2)}";
-                $acc[] = !is_array($addedVal) ?
+                        "{$currentIndent}- {$key}: {$iter($removedVal, $depth + 2)}");
+                array_push($acc, !is_array($addedVal) ?
                     "{$currentIndent}+ {$key}: {$addedVal}" :
-                        "{$currentIndent}+ {$key}: {$iter($addedVal, $depth + 2)}";
+                        "{$currentIndent}+ {$key}: {$iter($addedVal, $depth + 2)}");
                 return $acc;
             }
-            $acc[] = "{$currentIndent}{$status} {$key}: {$iter($val, $depth + 2)}";
+            array_push($acc, "{$currentIndent}{$status} {$key}: {$iter($val, $depth + 2)}");
             return $acc;
         }, []);
 

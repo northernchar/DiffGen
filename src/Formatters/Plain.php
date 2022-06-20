@@ -26,7 +26,7 @@ function plain($node)
             $currentPath = $path === '' ? "{$key}" : "{$path}.{$key}";
 
             if ($statusCode === 0) {
-                $acc[] = $iter($val, $currentPath);
+                array_push($acc, $iter($val, $currentPath));
                 return $acc;
             }
             if ($statusCode === 1) {
@@ -35,11 +35,11 @@ function plain($node)
                     $val = 'null';
                 }
 
-                $acc[] = "Property '{$currentPath}' was added with value: {$val}";
+                array_push($acc, "Property '{$currentPath}' was added with value: {$val}");
                 return $acc;
             }
             if ($statusCode === -1) {
-                $acc[] = "Property '{$currentPath}' was removed";
+                array_push($acc, "Property '{$currentPath}' was removed");
                 return $acc;
             }
             if ($statusCode === 2) {
@@ -62,7 +62,7 @@ function plain($node)
                     $addedVal = 'null';
                 }
 
-                $acc[] = "Property '{$currentPath}' was updated. From {$removedVal} to {$addedVal}";
+                array_push($acc, "Property '{$currentPath}' was updated. From {$removedVal} to {$addedVal}");
                 return $acc;
             }
         }, []);
