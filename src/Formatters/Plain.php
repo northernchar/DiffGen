@@ -31,6 +31,10 @@ function plain($node)
             }
             if ($statusCode === 1) {
                 $val = !is_array($val) ? var_export($val, true) : "[complex value]";
+                if ($val === "NULL") {
+                    $val = 'null';
+                }
+
                 $acc[] = "Property '{$currentPath}' was added with value: {$val}";
                 return $acc;
             }
@@ -50,6 +54,13 @@ function plain($node)
                 $addedVal = !is_array($added[$addedKey]) ?
                     var_export($added[$addedKey], true) :
                         "[complex value]";
+
+                if ($removedVal === "NULL") {
+                    $removedVal = 'null';
+                }
+                if ($addedVal === "NULL") {
+                    $addedVal = 'null';
+                }
 
                 $acc[] = "Property '{$currentPath}' was updated. From {$removedVal} to {$addedVal}";
                 return $acc;
