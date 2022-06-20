@@ -29,12 +29,12 @@ function json(mixed $node)
                 $added = $value[1]['data'];
                 $removedVal = !is_array($removed[$key]) ? toString($removed[$key]) : $removed[$key];
                 $addedVal = !is_array($added[$key]) ? toString($added[$key]) : $added[$key];
-                $acc[] = [
+                $acc = [...$acc, [
                     'key' => $key,
                     'old value' => $iter($removedVal),
                     'new value' => $iter($addedVal),
                     'status' => "updated"
-                ];
+                ]]; 
                 return $acc;
             }
             $acc[] = $status !== '' ? [
