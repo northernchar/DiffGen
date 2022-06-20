@@ -34,7 +34,7 @@ function json(mixed $node)
                     'old value' => $iter($removedVal),
                     'new value' => $iter($addedVal),
                     'status' => "updated"
-                ]]; 
+                ]];
                 return $acc;
             }
             $acc[] = $status !== '' ? [
