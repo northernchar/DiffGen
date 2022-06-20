@@ -29,22 +29,22 @@ function json(mixed $node)
                 $added = $value[1]['data'];
                 $removedVal = !is_array($removed[$key]) ? toString($removed[$key]) : $removed[$key];
                 $addedVal = !is_array($added[$key]) ? toString($added[$key]) : $added[$key];
-                array_push($acc, [
+                $acc[] = [
                     'key' => $key,
                     'old value' => $iter($removedVal),
                     'new value' => $iter($addedVal),
                     'status' => "updated"
-                ]);
+                ];
                 return $acc;
             }
-            array_push($acc, $status !== '' ? [
+            $acc[] = $status !== '' ? [
                 'key' => $key,
                 'value' => $iter($value),
                 'status' => $status
                 ] : [
                     'key' => $key,
                     'value' => $iter($value)
-                ]);
+                ];
             return $acc;
         }, []);
 

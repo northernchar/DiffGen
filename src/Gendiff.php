@@ -21,27 +21,27 @@ function buildDiff(array $original, array $committed): array
             if ($status === 0) {
                 if (isAssoc($original[$key]) && isAssoc($committed[$key])) {
                     $val = buildDiff($original[$key], $committed[$key]);
-                    array_push($acc, getAst($key, $val, 0));
+                    $acc[] = getAst($key, $val, 0);
                     return $acc;
                 }
                 if ($original[$key] === $committed[$key]) {
-                    array_push($acc, getAst($key, $original[$key], 0, getValueType($original[$key])));
+                    $acc[] = getAst($key, $original[$key], 0, getValueType($original[$key]));
                     return $acc;
                 } else {
                     $re = [
                         getAst($key, $original[$key], -1, getValueType($original[$key])),
                         getAst($key, $committed[$key], 1, getValueType($committed[$key]))
                     ];
-                    array_push($acc, getAst($key, $re, 2));
+                    $acc[] = getAst($key, $re, 2);
                     return $acc;
                 }
             }
             if ($status === 1) {
-                array_push($acc, getAst($key, $committed[$key], 1, getValueType($committed[$key])));
+                $acc[] = getAst($key, $committed[$key], 1, getValueType($committed[$key]));
                 return $acc;
             }
             if ($status === -1) {
-                array_push($acc, getAst($key, $original[$key], -1, getValueType($original[$key])));
+                $acc[] = getAst($key, $original[$key], -1, getValueType($original[$key]));
                 return $acc;
             }
             return $acc;
@@ -49,10 +49,14 @@ function buildDiff(array $original, array $committed): array
         []
     );
 
-    $sortedChanges = sortAst($changes);
+    usort($changes, function ($a, $b) {
+        $dataA = $a['data'];
+        $dataB = $b['data'];
 
+        return array_keys($dataA) <=> array_keys($dataB);
+    });
 
-    return array_values([...$sortedChanges]);
+    return array_values([...$changes]);
 }
 
 function buildData(string $path): array
@@ -75,16 +79,4 @@ function genDiff(string $pathToFile1, string $pathToFile2, string $format = "sty
     $changes = buildDiff($original, $committed);
 
     return format($changes, $format);
-}
-
-function sortAst($changes)
-{
-    usort($changes, function ($a, $b) {
-        $dataA = $a['data'];
-        $dataB = $b['data'];
-
-        return array_keys($dataA) <=> array_keys($dataB);
-    });
-
-    return $changes;
 }

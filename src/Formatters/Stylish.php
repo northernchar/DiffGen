@@ -75,15 +75,15 @@ function stylish(mixed $node, string $replacer = " ", int $spacesCount = 2): str
                     $addedVal = 'null';
                 }
 
-                array_push($acc, !is_array($removedVal) ?
+                $acc[] = !is_array($removedVal) ?
                     "{$currentIndent}- {$key}: {$removedVal}" :
-                        "{$currentIndent}- {$key}: {$iter($removedVal, $depth + 2)}");
-                array_push($acc, !is_array($addedVal) ?
+                        "{$currentIndent}- {$key}: {$iter($removedVal, $depth + 2)}";
+                $acc[] = !is_array($addedVal) ?
                     "{$currentIndent}+ {$key}: {$addedVal}" :
-                        "{$currentIndent}+ {$key}: {$iter($addedVal, $depth + 2)}");
+                        "{$currentIndent}+ {$key}: {$iter($addedVal, $depth + 2)}";
                 return $acc;
             }
-            array_push($acc, "{$currentIndent}{$status} {$key}: {$iter($val, $depth + 2)}");
+            $acc[] = "{$currentIndent}{$status} {$key}: {$iter($val, $depth + 2)}";
             return $acc;
         }, []);
 
