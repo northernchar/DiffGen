@@ -44,7 +44,6 @@ function json(mixed $node)
                     'key' => $key,
                     'value' => $iter($value)
                 ]];
-            return $acc;
         }, []);
 
         return $newAst;
@@ -61,10 +60,8 @@ function getJSONStatus(int $status)
     switch ($status) {
         case 1:
             return "added";
-            break;
         case -1:
             return "removed";
-            break;
     }
 
     return $result;
