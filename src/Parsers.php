@@ -14,6 +14,6 @@ function getYamlData(string $pathToFile): mixed
 {
     $content = Yaml::parseFile($pathToFile, Yaml::PARSE_OBJECT_FOR_MAP);
     $jsonified = json_encode($content);
-    $preres = json_decode($jsonified, true);
-    return $preres !== false ? $preres : '';
+    $preres = $jsonified !== false ? json_decode($jsonified, true) : '';
+    return $preres;
 }
