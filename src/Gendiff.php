@@ -37,9 +37,7 @@ function buildDiff(array $original, array $committed): array
             if ($status === 1) {
                 return [...$acc, getAst($key, $committed[$key], 1, getValueType($committed[$key]))];
             }
-            if ($status === -1) {
-                return [...$acc, getAst($key, $original[$key], -1, getValueType($original[$key]))];
-            }
+            return [...$acc, getAst($key, $original[$key], -1, getValueType($original[$key]))];
         },
         []
     );
