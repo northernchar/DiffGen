@@ -18,21 +18,16 @@ function getStylishStatus(int $status)
     return '';
 }
 
-function isNode(mixed $node)
-{
-    if (isAssoc($node) && array_key_exists('data', $node)) {
-        return true;
-    }
-    if (is_array($node) && array_key_exists('data', $node[0])) {
-        return true;
-    }
-    return false;
-}
-
 function stylish(mixed $node, string $replacer = " ", int $spacesCount = 2): string
 {
 
     $iter = function ($node, $depth) use (&$iter, $replacer, $spacesCount) {
+        $isNode = (
+            isAssoc($node) && array_key_exists('data', $node)
+            ) || (
+                !isAssoc($node) && is_array($node) && array_key_exists('data', $node[0])
+            );
+
         if (!is_array($node)) {
             return toString($node);
         }
@@ -42,7 +37,6 @@ function stylish(mixed $node, string $replacer = " ", int $spacesCount = 2): str
         $bracketIndent = str_repeat($replacer, $indentSize - $spacesCount);
         $openBracket = array_key_exists('type', $node)  && $node['type'] === 'array' ? "[" : "{";
         $closeBracket = array_key_exists('type', $node) && $node['type'] === 'array' ? "]" : "}";
-        $isNode = isNode($node);
 
         if (!$isNode && is_array($node)) {
             $newCurrentIndent = str_repeat($replacer, $indentSize + $spacesCount);
