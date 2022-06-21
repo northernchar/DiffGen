@@ -23,9 +23,6 @@ function stylish(mixed $node, string $replacer = " ", int $spacesCount = 2): str
 
     $iter = function ($node, $depth) use (&$iter, $replacer, $spacesCount) {
         if (!is_array($node)) {
-            if ($node === null) {
-                return 'null';
-            }
             return toString($node);
         }
 
@@ -62,13 +59,6 @@ function stylish(mixed $node, string $replacer = " ", int $spacesCount = 2): str
                 $added = $val[1]['data'];
                 $removedVal = !is_array($removed[$key]) ? toString($removed[$key]) : $removed[$key];
                 $addedVal = !is_array($added[$key]) ? toString($added[$key]) : $added[$key];
-
-                if ($removedVal === "NULL") {
-                    $removedVal = 'null';
-                }
-                if ($addedVal === "NULL") {
-                    $addedVal = 'null';
-                }
 
                 $acc[] = !is_array($removedVal) ?
                     "{$currentIndent}- {$key}: {$removedVal}" :

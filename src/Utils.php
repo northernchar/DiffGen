@@ -10,6 +10,9 @@ function getExFromFile(string $path): string
 
 function toString(mixed $value): string
 {
+    if ($value === null) {
+        return 'null';
+    }
     return trim(var_export($value, true), "'");
 }
 

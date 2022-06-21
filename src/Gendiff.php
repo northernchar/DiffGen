@@ -22,28 +22,23 @@ function buildDiff(array $original, array $committed): array
             if ($status === 0) {
                 if (isAssoc($original[$key]) && isAssoc($committed[$key])) {
                     $val = buildDiff($original[$key], $committed[$key]);
-                    $acc[] = getAst($key, $val, 0);
-                    return $acc;
+                    return [...$acc, getAst($key, $val, 0)];
                 }
                 if ($original[$key] === $committed[$key]) {
-                    $acc[] = getAst($key, $original[$key], 0, getValueType($original[$key]));
-                    return $acc;
+                    return [...$acc, getAst($key, $original[$key], 0, getValueType($original[$key]))];
                 } else {
                     $re = [
                         getAst($key, $original[$key], -1, getValueType($original[$key])),
                         getAst($key, $committed[$key], 1, getValueType($committed[$key]))
                     ];
-                    $acc[] = getAst($key, $re, 2);
-                    return $acc;
+                    return [...$acc, getAst($key, $re, 2)];
                 }
             }
             if ($status === 1) {
-                $acc[] = getAst($key, $committed[$key], 1, getValueType($committed[$key]));
-                return $acc;
+                return [...$acc, getAst($key, $committed[$key], 1, getValueType($committed[$key]))];
             }
             if ($status === -1) {
-                $acc[] = getAst($key, $original[$key], -1, getValueType($original[$key]));
-                return $acc;
+                return [...$acc, getAst($key, $original[$key], -1, getValueType($original[$key]))];
             }
         },
         []
@@ -61,15 +56,13 @@ function buildDiff(array $original, array $committed): array
 
 function buildData(string $path): array
 {
-    $data = [];
-
     if (isJson($path)) {
-        $data = getJsonData($path);
+        return getJsonData($path);
     }
     if (isYaml($path)) {
-        $data = getYamlData($path);
+        return getYamlData($path);
     }
-    return $data;
+    return [];
 }
 
 function genDiff(string $pathToFile1, string $pathToFile2, string $format = "stylish"): string
