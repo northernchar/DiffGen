@@ -38,7 +38,7 @@ function stylish(mixed $node, string $replacer = " ", int $spacesCount = 2): str
         $openBracket = array_key_exists('type', $node)  && $node['type'] === 'array' ? "[" : "{";
         $closeBracket = array_key_exists('type', $node) && $node['type'] === 'array' ? "]" : "}";
 
-        if (!$isNode && is_array($node)) {
+        if (!$isNode) {
             $newCurrentIndent = str_repeat($replacer, $indentSize + $spacesCount);
             $maped = array_map(
                 fn($key, $val) => "{$newCurrentIndent}{$key}: {$iter($val, $depth + 2)}",
