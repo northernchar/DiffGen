@@ -29,12 +29,8 @@ function plain(mixed $node)
                 return [...$acc, $iter($val, $currentPath)];
             }
             if ($statusCode === 1) {
-                $val = !is_array($val) ? var_export($val, true) : "[complex value]";
-                if ($val === "NULL") {
-                    $val = 'null';
-                }
-
-                return [...$acc, "Property '{$currentPath}' was added with value: {$val}"];
+                $value = plainToString($val);
+                return [...$acc, "Property '{$currentPath}' was added with value: {$value}"];
             }
             if ($statusCode === -1) {
                 return [...$acc, "Property '{$currentPath}' was removed"];
@@ -42,23 +38,9 @@ function plain(mixed $node)
             if ($statusCode === 2) {
                 $removed = $val[0]['data'];
                 $added = $val[1]['data'];
-                $removedKey = array_key_first($removed);
-                $addedKey = array_key_first($added);
-                $removedVal = !is_array($removed[$removedKey]) ?
-                    var_export($removed[$removedKey], true) :
-                        "[complex value]";
-
-                $addedVal = !is_array($added[$addedKey]) ?
-                    var_export($added[$addedKey], true) :
-                        "[complex value]";
-
-                if ($removedVal === "NULL") {
-                    $removedVal = 'null';
-                }
-                if ($addedVal === "NULL") {
-                    $addedVal = 'null';
-                }
-
+                $key = array_key_first($removed);
+                $removedVal = plainToString($removed[$key]);
+                $addedVal = plainToString($added[$key]);
                 return [...$acc, "Property '{$currentPath}' was updated. From {$removedVal} to {$addedVal}"];
             }
         }, []);
@@ -69,4 +51,15 @@ function plain(mixed $node)
     };
 
     return $iter($node, '');
+}
+
+function plainToString(mixed $value): string
+{
+    if (!is_array($value)) {
+        if ($value === null) {
+            return 'null';
+        }
+        return var_export($value, true);
+    }
+    return "[complex value]";
 }
