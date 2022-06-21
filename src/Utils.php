@@ -51,7 +51,7 @@ function getValueType(mixed $value)
     if (isAssoc($value)) {
         return 'nested';
     }
-    if (!isAssoc($value) && is_array($value)) {
+    if (is_array($value)) {
         return 'array';
     }
     return "leaf";

@@ -18,10 +18,15 @@ function getStylishStatus(int $status)
     return '';
 }
 
-function isNode($node)
+function isNode(mixed $node)
 {
-    return (isAssoc($node) && array_key_exists('data', $node)) ||
-    (!isAssoc($node) && is_array($node) && array_key_exists('data', $node[0]));
+    if (isAssoc($node) && array_key_exists('data', $node)) {
+        return true;
+    }
+    if (is_array($node) && array_key_exists('data', $node[0])) {
+        return true;
+    }
+    return false;
 }
 
 function stylish(mixed $node, string $replacer = " ", int $spacesCount = 2): string
@@ -40,14 +45,14 @@ function stylish(mixed $node, string $replacer = " ", int $spacesCount = 2): str
         $isNode = isNode($node);
 
         if (!$isNode && is_array($node)) {
-            $currentIndent = str_repeat($replacer, $indentSize + $spacesCount);
-            $lines = array_map(
-                fn($key, $val) => "{$currentIndent}{$key}: {$iter($val, $depth + 2)}",
+            $newCurrentIndent = str_repeat($replacer, $indentSize + $spacesCount);
+            $maped = array_map(
+                fn($key, $val) => "{$newCurrentIndent}{$key}: {$iter($val, $depth + 2)}",
                 array_keys($node),
                 $node
             );
 
-            $result = [$openBracket, ...$lines, "{$bracketIndent}{$closeBracket}"];
+            $result = [$openBracket, ...$maped, "{$bracketIndent}{$closeBracket}"];
             return implode("\n", $result);
         }
 
