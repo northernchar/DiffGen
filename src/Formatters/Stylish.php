@@ -7,20 +7,15 @@ use function Differ\Utils\isAssoc;
 
 function getStylishStatus(int $status)
 {
-    $result = '';
-
     switch ($status) {
         case 0:
-            $result = " ";
-            break;
+            return " ";
         case 1:
-            $result = "+";
-            break;
+            return "+";
         case -1:
-            $result = "-";
-            break;
+            return "-";
     }
-    return $result;
+    return '';
 }
 
 function stylish(mixed $node, string $replacer = " ", int $spacesCount = 2): string

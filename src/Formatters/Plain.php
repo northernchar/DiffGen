@@ -38,9 +38,9 @@ function plain(mixed $node)
             if ($statusCode === 2) {
                 $removed = $val[0]['data'];
                 $added = $val[1]['data'];
-                $key = array_key_first($removed);
-                $removedVal = plainToString($removed[$key]);
-                $addedVal = plainToString($added[$key]);
+                $nestedKey = array_key_first($removed);
+                $removedVal = plainToString($removed[$nestedKey]);
+                $addedVal = plainToString($added[$nestedKey]);
                 return [...$acc, "Property '{$currentPath}' was updated. From {$removedVal} to {$addedVal}"];
             }
         }, []);
