@@ -64,16 +64,13 @@ function stylish(mixed $node, string $replacer = " ", int $spacesCount = 2): str
                 $removedVal = !is_array($removed[$key]) ? toString($removed[$key]) : $removed[$key];
                 $addedVal = !is_array($added[$key]) ? toString($added[$key]) : $added[$key];
 
-                $acc[] = !is_array($removedVal) ?
+                return [...$acc, !is_array($removedVal) ?
                     "{$currentIndent}- {$key}: {$removedVal}" :
-                        "{$currentIndent}- {$key}: {$iter($removedVal, $depth + 2)}";
-                $acc[] = !is_array($addedVal) ?
-                    "{$currentIndent}+ {$key}: {$addedVal}" :
-                        "{$currentIndent}+ {$key}: {$iter($addedVal, $depth + 2)}";
-                return $acc;
+                        "{$currentIndent}- {$key}: {$iter($removedVal, $depth + 2)}", !is_array($addedVal) ?
+                            "{$currentIndent}+ {$key}: {$addedVal}" :
+                                "{$currentIndent}+ {$key}: {$iter($addedVal, $depth + 2)}"];
             }
-            $acc[] = "{$currentIndent}{$status} {$key}: {$iter($val, $depth + 2)}";
-            return $acc;
+            return [...$acc, "{$currentIndent}{$status} {$key}: {$iter($val, $depth + 2)}"];
         }, []);
 
         $result = [$openBracket, ...$lines, "{$bracketIndent}{$closeBracket}"];
